@@ -1,0 +1,61 @@
+<html ng-app="RSSFeedApp">
+
+<head>
+
+	<script type='text/javascript' src="js/lib/jquery.min.js"></script>
+	<script type='text/javascript' src='js/lib/angular.min.js'></script>
+	<script type="text/javascript" src="js/lib/angular-resource.min.js"></script>
+	<script src="js/lib/foundation.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/foundation.min.css">
+</head>
+
+<body >
+		<!--<div style=" position: fixed;top: 40px;left: 40px;width: 200px;border-right:1px solid #aaa;">
+				<ul>
+					<li><a href="#" ng-click="feedSrc='http://feeds2.feedburner.com/Mashable';loadFeed($event)">Mashable</a></li>
+					<li><a href="#" ng-click="feedSrc='http://feeds2.feedburner.com/Mashable';loadFeed($event)">Mashable</a></li>
+				</ul>
+					
+
+	</div>-->
+	<div class="row" style="padding:10%;">
+	
+		<div class="small-1 large-4 columns" style=" position: fixed;top: 11%;left: 40px;width: 300px;border-right:1px solid #aaa;"  ng-controller="feedController"><h3>freader...</h3>
+		<form ng-submit="createFeed()">
+				<input type="text" placeholder="feed name" ng-model="feedName">
+				<input type="text" placeholder="feed link" ng-model="feedLink">
+
+				<button class="button [secondary radius tiny small]" type="submit">Add</button>
+			</form>
+			<!--<a href="#" ng-click="feedSrc='http://feeds2.feedburner.com/Mashable';loadFeed($event)">Mashable</a>-->
+			<ul>
+				<li ng-repeat="feed in feeds">
+					<a href="{{feed.link}}">{{feed.name}}</a>
+				</li>
+			</ul>
+			
+	
+		</div>
+		<div class="small-6 large-8 columns" ng-controller="FeedCtrl">
+			
+			<form ng-submit="loadFeed($event)">
+				<input type="text" ng-model="feedSrc" placeholder="Drag and drop the feed over here...">
+				<button type="submit" ng-model="loadButonText" tabindex="-1">Start Reading</button>
+			</form>
+					<div>
+						<ul class="unstyled">
+						<h3 ng-model="title">{{title}}</h3>
+							<span ng-show="feeds.length > 0">{{(feeds | filter:filterText).length}} Items</span>
+							<li ng-repeat="feed in feeds | filter:filterText">
+								<h5><a href="{{feed.link}}" target="_blank">{{feed.title}}</a></h5> 
+								<p>{{feed.contentSnippet}}</p>
+								<span class="small">{{feed.publishedDate}}</span>
+							</li>
+						</ul>
+					</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="js/lib/script.js"></script>
+
+</html>
